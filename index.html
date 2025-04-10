@@ -8,6 +8,8 @@
         body{
             font-family: Arial, Helvetica, sans-serif;
             background-image: linear-gradient(45deg,rgb(141, 11, 11), rgb(61, 32, 190));
+            margin: 0;
+            padding: 0;
         }
         div{
             background-color: rgba(0, 0, 0, 0.9);
@@ -18,13 +20,16 @@
             padding: 80px;
             border-radius: 15px;
             color:#fff;
-
+            width: 250px;
         }
         input{
             padding: 15px;
             border:none;
             outline:none;
-            front-size: 15px;
+            font-size: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 15px;
         }
         button{
             background-color: dodgerblue;
@@ -33,22 +38,108 @@
             width: 100%;
             border-radius: 10px;
             color: white;
-            font: size 15px;
+            font-size: 15px;
             cursor: pointer;
+            margin-top: 10px;
         }
         button:hover{
             background-color: deepskyblue;
         }
+        .esqueci-senha {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .esqueci-senha a {
+            color: dodgerblue;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .esqueci-senha a:hover {
+            text-decoration: underline;
+            color: deepskyblue;
+        }
+        .recuperar-senha-form {
+            display: none;
+        }
+        .voltar-login {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .voltar-login a {
+            color: dodgerblue;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .voltar-login a:hover {
+            text-decoration: underline;
+            color: deepskyblue;
+        }
     </style>
-    </head>
+</head>
 <body>
-    <div class="tela-login">
+    <!-- Formulário de Login -->
+    <div class="tela-login" id="loginDiv">
         <h1>Login</h1>
-        <input type="text" placeholder="Nome">
-        <br><br>
-        <input type="password" placeholder="Senha" >
-        <br><br>
-        <button>Enviar</button>
+        <input type="text" placeholder="Nome de usuário ou email" id="loginUsername">
+        <input type="password" placeholder="Senha" id="loginPassword">
+        <button onclick="fazerLogin()">Entrar</button>
+        <div class="esqueci-senha">
+            <a href="#" onclick="mostrarRecuperarSenha()">Esqueci minha senha</a>
+        </div>
     </div>
+
+    <!-- Formulário de Recuperação de Senha -->
+    <div class="recuperar-senha-form" id="recuperarSenhaDiv">
+        <h1>Recuperar Senha</h1>
+        <p>Digite seu email para receber um link de recuperação</p>
+        <input type="email" placeholder="Seu email" id="recuperarEmail">
+        <button onclick="enviarLinkRecuperacao()">Enviar Link</button>
+        <div class="voltar-login">
+            <a href="#" onclick="mostrarLogin()">Voltar para o login</a>
+        </div>
+    </div>
+
+    <script>
+        function mostrarRecuperarSenha() {
+            document.getElementById('loginDiv').style.display = 'none';
+            document.getElementById('recuperarSenhaDiv').style.display = 'block';
+        }
+
+        function mostrarLogin() {
+            document.getElementById('recuperarSenhaDiv').style.display = 'none';
+            document.getElementById('loginDiv').style.display = 'block';
+        }
+
+        function fazerLogin() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if(!username || !password) {
+                alert('Por favor, preencha todos os campos!');
+                return;
+            }
+            
+            // Simulação de login (substitua por código real)
+            alert(`Login realizado para: ${username}`);
+            
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+        }
+
+        function enviarLinkRecuperacao() {
+            const email = document.getElementById('recuperarEmail').value;
+            
+            if(!email) {
+                alert('Por favor, digite seu email!');
+                return;
+            }
+            
+            // Simulação de envio de link (substitua por código real)
+            alert(`Link de recuperação enviado para: ${email}\n(Esta é uma simulação - em um sistema real, um email seria enviado)`);
+            
+            document.getElementById('recuperarEmail').value = '';
+            mostrarLogin();
+        }
+    </script>
 </body>
 </html>
